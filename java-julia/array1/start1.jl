@@ -8,14 +8,11 @@ start1([1, 2, 3], [1, 3]) → 2
 start1([7, 2, 3], [1]) → 1
 start1([1, 2], []) → 1
 """
-function start1(A, B)
+function start1(arrays...)
     count = 0
-    for array in [A, B]
-        if length(array) == 0
-            continue
-        elseif array[1] == 1
-            count += 1
-        end
+    for array in arrays
+        length(array) == 0 && continue
+        array[1] == 1 && (count += 1)
     end
     return count
 end
