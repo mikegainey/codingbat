@@ -1,7 +1,7 @@
 input = """
-topping2({"ice cream": "cherry"}) → {"yogurt": "cherry", "ice cream": "cherry"}
-topping2({"spinach": "dirt", "ice cream": "cherry"}) → {"yogurt": "cherry", "spinach": "nuts", "ice cream": "cherry"}
-topping2({"yogurt": "salt"}) → {"yogurt": "salt"}
+mapab4({"a": "aaa", "b": "bb", "c": "cake"}) → {"a": "aaa", "b": "bb", "c": "aaa"}
+mapab4({"a": "aa", "b": "bbb", "c": "cake"}) → {"a": "aa", "b": "bbb", "c": "bbb"}
+mapab4({"a": "aa", "b": "bbb"}) → {"a": "aa", "b": "bbb", "c": "bbb"}
 """
 
 a = x -> replace(x, "{" => "Dict(")
