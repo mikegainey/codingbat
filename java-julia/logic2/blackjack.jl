@@ -27,18 +27,14 @@ function blackjack1(a, b)
 end
 
 function blackjack2(a, b)
-    nums = []
-    push!(nums, (21 - a, a))
-    push!(nums, (21 - b, b))
-    filter!(x -> x[1] ≥ 0, nums)
-    if length(nums) == 0
+    diffs = [21 - a, 21 - b]
+    filter!(x -> x ≥ 0, diffs)
+    if length(diffs) == 0
         return 0
     else
-        sort!(nums, by=x->x[1])
-        return nums[1][2]
+        return 21 - minimum(diffs)
     end
 end
-
 
 using Test
 function test()
