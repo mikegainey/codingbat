@@ -27,7 +27,7 @@ function blackjack1(a, b)
 end
 
 function blackjack2(a, b)
-    diffs = [21 - a, 21 - b]
+    diffs = [21 - x for x in [a, b]]
     filter!(x -> x ≥ 0, diffs)
     if length(diffs) == 0
         return 0

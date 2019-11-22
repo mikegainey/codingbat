@@ -9,11 +9,30 @@ so 12 rounds down to 10.
 Given 3 ints, a b c, return the sum of their rounded values.
 To avoid code repetition, write a separate helper "public int round10(int num) {" and call it 3 times.
 
-roundSum(16, 17, 18) → 60
-roundSum(12, 13, 14) → 30
-roundSum(6, 4, 4) → 10
+roundSum(16, 17, 18) == 60
+roundSum(12, 13, 14) == 30
+roundSum(6, 4, 4) == 10
 """
 function round10(num)
     msd, lsd = divrem(num, 10)
-
+    if lsd ≥ 5
+        msd += 1
+    end
+    return msd * 10
 end
+
+function roundsum(args...)
+    return args .|> round10 |> sum
+end
+
+using Test
+function test()
+    @testset begin
+        @test roundsum(16, 17, 18) == 60
+        @test roundsum(12, 13, 14) == 30
+        @test roundsum(6, 4, 4) == 10
+    end
+    nothing
+end
+
+
