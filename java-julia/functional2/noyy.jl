@@ -10,15 +10,17 @@ noyy(["a", "b", "cy"]) == ["ay", "by"]
 noyy(["xx", "ya", "zz"]) == ["xxy", "yay", "zzy"]
 """
 function noyy(los)
-    return filter(s -> !occursin("yy", s), map(s -> s * 'y', los))
+    addy = map(s -> s * 'y', los)
+    rmyy = filter(s -> !occursin("yy", s), addy)
+    return rmyy
 end
 
 using Test
 function test()
     @testset begin
-        @show noyy(["a", "b", "c"])# == ["ay", "by", "cy"]
-        @show noyy(["a", "b", "cy"])# == ["ay", "by"]
-        @show noyy(["xx", "ya", "zz"])# == ["xxy", "yay", "zzy"]
+        @test @show noyy(["a", "b", "c"]) == ["ay", "by", "cy"]
+        @test @show noyy(["a", "b", "cy"]) == ["ay", "by"]
+        @test @show noyy(["xx", "ya", "zz"]) == ["xxy", "yay", "zzy"]
     end
     nothing
 end
