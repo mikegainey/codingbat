@@ -9,7 +9,6 @@ noteen([1, 14, 1]) == [1, 1]
 noteen([15]) == []
 """
 function noteen(loi)
-    # [x for x in loi if x ∉ 13:19]
     filter(x -> x ∉ 13:19, loi)
 end
 
