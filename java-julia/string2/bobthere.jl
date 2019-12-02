@@ -2,7 +2,8 @@
 https://codingbat.com/prob/p175762
 String-2 > bobThere
 
-Return true if the given string contains a "bob" string, but where the middle 'o' char can be any char.
+Return true if the given string contains a "bob" string,
+    but where the middle 'o' char can be any char.
 
 bobthere("abcbob") == true
 bobthere("b9b") == true
