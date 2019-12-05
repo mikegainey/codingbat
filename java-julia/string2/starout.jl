@@ -10,7 +10,7 @@ starout("ab*cd") == "ad"
 starout("ab**cd") == "ad"
 starout("sm*eilly") == "silly"
 """
-function starout(s)
+function starout1(s)
     output = []
     lastchar = ""
     for c in s
@@ -21,9 +21,7 @@ function starout(s)
             lastchar = "star"
 
         else # not a star
-            if lastchar == "star"
-                # ignore this character
-            else
+            if lastchar != "star"
                 push!(output, c)
             end
             lastchar = "char"
@@ -32,12 +30,36 @@ function starout(s)
     join(output)
 end
 
+function isstar(c)
+    return c == '*'
+end
+
+function starout2(s)
+    if length(s) < 2
+        return s
+    elseif isletter(s[1]) && isletter(s[2]) # ab
+        return s[1] * starout2(s[2:end])
+    elseif isletter(s[1]) && isstar(s[2])   # b*
+        return starout2(s[2:end])
+    elseif isstar(s[1]) && isstar(s[2])     # **
+        return starout2(s[2:end])
+    elseif isstar(s[1]) && isletter(s[2])   # *c
+        return starout2(s[3:end])
+    else
+        error("All cases should have been covered already!")
+    end
+end
+
+
 using Test
 function test()
     @testset begin
-        @test @show starout("ab*cd") == "ad"
-        @test @show starout("ab**cd") == "ad"
-        @test @show starout("sm*eilly") == "silly"
+        @test @show starout1("ab*cd") == "ad"
+        @test @show starout1("ab**cd") == "ad"
+        @test @show starout1("sm*eilly") == "silly"
+        @test @show starout2("ab*cd") == "ad"
+        @test @show starout2("ab**cd") == "ad"
+        @test @show starout2("sm*eilly") == "silly"
     end
     nothing
 end
