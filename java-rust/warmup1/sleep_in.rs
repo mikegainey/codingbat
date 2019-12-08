@@ -20,4 +20,3 @@ fn sleep_in(weekday: bool, vacation: bool) -> bool {
     !weekday || vacation
 }
 
-main()

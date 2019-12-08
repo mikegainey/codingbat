@@ -11,3 +11,25 @@ xybalance("aaxbb") == false
 xybalance("yaaxbb") == false
 """
 function xybalance(str)
+    for i in length(str) : -1 : 1 # traverse the string in reverse
+        c = str[i]
+        if c == 'y'
+            return true
+        elseif c == 'x'
+            return false
+        end
+    end
+    nothing # should this be true or false (if no x's or y's are present)?
+end
+
+using Test
+function test()
+    @testset begin
+        @test xybalance("aaxbby") == true
+        @test xybalance("aaxbb") == false
+        @test xybalance("yaaxbb") == false
+    end
+    nothing
+end
+
+test()
