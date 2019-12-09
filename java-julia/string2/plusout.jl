@@ -14,11 +14,29 @@ function plusout(str, word)
     lens = length(str)
     lenw = length(word)
 
-    if lens < length(word)
+    if lens < lenw
         return "+" ^ lens
-    else
-        if str[1:lenw] == word
-            return word * plusout(str[lenw+1:end], word)
-        else
-            return "+" ^ lenw *
+    end
 
+    wordhead = str[1:lenw]     # the head with the length of the word
+    wordtail = str[lenw+1:end] # the rest of the string after the initial word
+    tail = str[2:end]          # the string minus the first character
+
+    if wordhead == word
+        return wordhead * plusout(wordtail, word)
+    else
+        return "+" * plusout(tail, word)
+    end
+end
+
+using Test
+function test()
+    @testset begin
+        @test plusout("12xy34", "xy") == "++xy++"
+        @test plusout("12xy34", "1") == "1+++++"
+        @test plusout("12xy34xyabcxy", "xy") == "++xy++xy+++xy"
+    end
+    nothing
+end
+
+test()
