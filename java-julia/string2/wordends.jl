@@ -44,6 +44,32 @@ function wordends2(str, word, output="")
     end
 end
 
+function wordends3(str, word)
+    output = ""
+    index = 1
+    while index <= length(str)
+        wordx = findnext(word, str, index)
+        if wordx != nothing
+
+            x1 = wordx[1] - 1   # the character before the word
+            x2 = wordx[end] + 1 # the character after the word
+
+            if x1 >= 1
+                output *= str[x1]
+            end
+            if x2 <= length(str)
+                output *= str[x2]
+            end
+
+            index = x2 # the next search index
+
+        else
+            return output
+        end
+    end
+    return output
+end
+
 using Test
 function test()
     @testset begin
@@ -53,6 +79,9 @@ function test()
         @test wordends2("abcXY123XYijk", "XY") == "c13i"
         @test wordends2("XY123XY", "XY") == "13"
         @test wordends2("XY1XY", "XY") == "11"
+        @test wordends3("abcXY123XYijk", "XY") == "c13i"
+        @test wordends3("XY123XY", "XY") == "13"
+        @test wordends3("XY1XY", "XY") == "11"
     end
     nothing
 end
