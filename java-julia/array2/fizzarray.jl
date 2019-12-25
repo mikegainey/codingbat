@@ -12,11 +12,7 @@ fizzarray(1) == [0]
 fizzarray(10) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 """
 function fizzarray(n)
-    output = []
-    for i in 0 : n-1
-        push!(output, i)
-    end
-    output
+    collect(0:n-1)
 end
 
 using Test
