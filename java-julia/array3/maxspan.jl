@@ -30,6 +30,11 @@ function maxspan1(ns)
     maxspan
 end
 
+#= A better way:  In an array of n elements, there will be one span of length n.  If the elements match, you're done.
+Otherwise, there will be 2 spans of length n-1.  Check them next.  Then check the 3 spans of n-2.
+The first match found will be the longest matching span.
+=#
+
 using Test
 function test()
     @testset begin
