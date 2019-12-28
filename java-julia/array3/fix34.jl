@@ -11,21 +11,21 @@ fix34([1, 3, 1, 4]) == [1, 3, 4, 1]
 fix34([1, 3, 1, 4, 4, 3, 1]) == [1, 3, 4, 1, 1, 3, 4]
 fix34([3, 2, 2, 4]) == [3, 4, 2, 2]
 """
-function fix34(ns)
+function fix34a(ns)
     threexs = [] # the indices of the 3's
-    num4s = 0    # the number of 4's (just to verify 3's and 4's are evenly matched)
+    fours = 0    # the number of 4's (just to verify 3's and 4's are evenly matched)
     others = []  # other numbers
     len = length(ns)
     for x in 1 : len
         if ns[x] == 3
             push!(threexs, x)
         elseif ns[x] == 4
-            num4s += 1
+            fours += 1
         else
             push!(others, ns[x])
         end
     end
-    @assert length(threexs) == num4s
+    @assert length(threexs) == fours
     output = []
     x = 1
     while x ≤ len
@@ -44,9 +44,9 @@ end
 using Test
 function test()
     @testset begin
-        @test fix34([1, 3, 1, 4]) == [1, 3, 4, 1]
-        @test fix34([1, 3, 1, 4, 4, 3, 1]) == [1, 3, 4, 1, 1, 3, 4]
-        @test fix34([3, 2, 2, 4]) == [3, 4, 2, 2]
+        @test fix34a([1, 3, 1, 4]) == [1, 3, 4, 1]
+        @test fix34a([1, 3, 1, 4, 4, 3, 1]) == [1, 3, 4, 1, 1, 3, 4]
+        @test fix34a([3, 2, 2, 4]) == [3, 4, 2, 2]
     end
     nothing
 end
