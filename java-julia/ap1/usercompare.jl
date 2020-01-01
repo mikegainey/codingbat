@@ -29,7 +29,14 @@ function usercompare(aname, aid, bname, bid)
     end
 end
 
-@show usercompare("bb", 1, "zz", 2) == -1
-@show usercompare("bb", 1, "aa", 2) == 1
-@show usercompare("bb", 1, "bb", 1) == 0
+using Test
+function test()
+    @testset begin
+        @test usercompare("bb", 1, "zz", 2) == -1
+        @test usercompare("bb", 1, "aa", 2) == 1
+        @test usercompare("bb", 1, "bb", 1) == 0
+    end
+    nothing
+end
 
+test()
