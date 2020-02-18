@@ -8,6 +8,9 @@ they must either all be chosen, or none of them chosen.
 For example, with the array {1, 2, 2, 2, 5, 2}, either all three 2's in the middle must be chosen or not, all as a group.
 (one loop can be used to find the extent of the identical values).
 
+note: I didn't read the instructions closely enough. My algorithm chooses or doesn't choose all identical values
+with no regard to whether or not they are adjacent. oops!
+
 groupsumclump([2, 4, 8], 10) == true
 groupsumclump([1, 2, 4, 8, 1], 14) == true
 groupsumclump([2, 4, 4, 8], 14) == false
