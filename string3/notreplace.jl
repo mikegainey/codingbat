@@ -10,32 +10,38 @@ notreplace("is test") == "is not test"
 notreplace("is-is") == "is not-is not"
 notreplace("This is right") == "This is not right"
 """
-# function notreplace(s)
-#     len = length(s)
-#     index = 1
-#     while index < len-1
-#         if s[index:index+1] == "is"
-#             # check preceeding character
-#             if index == 1
-#                 preceeding = false
-#             else
-#                 preceeding = isletter(s[index-1])
-#             end
-#             # check following character
-#             if index+1 == len
-#                 following = false
-#             else
-#                 following = isletter(s[index+2])
-#             end
-
-#             if !preceeding && !following
-#                 push!(output, "is not")
-#                 index += 2
-#             else
-
-function notreplace(s, index=1, output="")
-    if index > length(s)-1
-        string(output, s[index:end])
+function notreplace(s, index=1)
+    if index > length(s) - 1
+        return s[index:end]
     else
         if s[index:index+1] == "is"
+            if index > 1
+                before = isletter(s[index-1])
+            else
+                before = false
+            end
+            if index < length(s) - 1
+                after = isletter(s[index+2])
+            else
+                after = false
+            end
+            if !before && !after
+                return string("is not", notreplace(s, index+2))
+            else
+                return string(s[index], notreplace(s, index+1))
+            end
+        else
+            return string(s[index], notreplace(s, index+1))
+        end
+    end
+end
 
+using Test
+function test()
+    @testset begin
+        @test notreplace("is test") == "is not test"
+        @test notreplace("is-is") == "is not-is not"
+        @test notreplace("This is right") == "This is not right"
+    end
+    nothing
+end
