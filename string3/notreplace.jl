@@ -15,23 +15,28 @@ function notreplace(s, index=1)
         return s[index:end]
     else
         if s[index:index+1] == "is"
+
+            # check the previous character if it exists
             if index > 1
                 before = isletter(s[index-1])
             else
                 before = false
             end
+
+            # check the following character if it exists
             if index < length(s) - 1
                 after = isletter(s[index+2])
             else
                 after = false
             end
+
             if !before && !after
                 return string("is not", notreplace(s, index+2))
             else
-                return string(s[index], notreplace(s, index+1))
+                return string(s[index], notreplace(s, index+1)) # code duplication!
             end
         else
-            return string(s[index], notreplace(s, index+1))
+            return string(s[index], notreplace(s, index+1)) # code duplication!
         end
     end
 end
